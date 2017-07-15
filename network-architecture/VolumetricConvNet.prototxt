@@ -5,7 +5,8 @@ layer {
   top: "data"
   top: "label"
   hdf5_data_param{
-    source: "/data/ssd/public/lqyu/PROMISE12/list/train_server.list"
+    source: "./train_sample.list"
+    #source: "/home/lqyu/server/gpu8/PROMISE12/list/train.list"
     batch_size: 8
     shuffle: true
 
@@ -40,7 +41,6 @@ layer {
     kernel_size: 3
     kernel_size: 3
     kernel_size: 3
-    engine: CAFFE
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -83,17 +83,14 @@ layer {
   type: "ReLU"
   bottom: "conv1a"
   top: "conv1a"
-  relu_param {
-    engine: CAFFE
-  }
 }
 
 layer {
   name: "pool1"
-  type: "PoolingND"
+  type: "Pooling"
   bottom: "conv1a"
   top: "pool1"
-  pooling_nd_param {
+  pooling_param {
     pool: MAX
     kernel_size: 2
     stride: 2
@@ -120,7 +117,6 @@ layer {
     kernel_size: 3
     kernel_size: 3
     kernel_size: 3
-    engine: CAFFE
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -162,9 +158,6 @@ layer {
   type: "ReLU"
   bottom: "conv2a"
   top: "conv2a"
-  relu_param {
-    engine: CAFFE
-  }
 }
 
 layer {
@@ -187,7 +180,6 @@ layer {
     kernel_size: 3
     kernel_size: 3
     kernel_size: 3
-    engine: CAFFE
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -244,7 +236,6 @@ layer {
     axis: 1
     num_output: 128
     kernel_size: 1
-    engine: CAFFE
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -295,17 +286,14 @@ layer {
   type: "ReLU"
   bottom: "conv2b_sum"
   top: "conv2b_sum"
-  relu_param {
-    engine: CAFFE
-  }
 }
 
 layer {
   name: "pool2"
-  type: "PoolingND"
+  type: "Pooling"
   bottom: "conv2b_sum"
   top: "pool2"
-  pooling_nd_param {
+  pooling_param {
     pool: MAX
     kernel_size: 2
     stride: 2
@@ -333,7 +321,6 @@ layer {
     kernel_size: 3
     kernel_size: 3
     kernel_size: 3
-    engine: CAFFE
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -375,9 +362,6 @@ layer {
   type: "ReLU"
   bottom: "conv3a"
   top: "conv3a"
-  relu_param {
-    engine: CAFFE
-  }
 }
 
 layer {
@@ -400,7 +384,6 @@ layer {
     kernel_size: 3
     kernel_size: 3
     kernel_size: 3
-    engine: CAFFE
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -456,7 +439,6 @@ layer {
     axis: 1
     num_output: 256
     kernel_size: 1
-    engine: CAFFE
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -508,18 +490,15 @@ layer {
   type: "ReLU"
   bottom: "conv3b_sum"
   top: "conv3b_sum"
-  relu_param {
-    engine: CAFFE
-  }
 }
 
 
 layer {
   name: "pool3"
-  type: "PoolingND"
+  type: "Pooling"
   bottom: "conv3b_sum"
   top: "pool3"
-  pooling_nd_param {
+  pooling_param {
     pool: MAX
     kernel_size: 2
     stride: 2
@@ -546,7 +525,6 @@ layer {
     kernel_size: 3
     kernel_size: 3
     kernel_size: 3
-    engine: CAFFE
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -588,9 +566,6 @@ layer {
   type: "ReLU"
   bottom: "conv4a"
   top: "conv4a"
-  relu_param {
-    engine: CAFFE
-  }
 }
 
 layer {
@@ -613,7 +588,6 @@ layer {
     kernel_size: 3
     kernel_size: 3
     kernel_size: 3
-    engine: CAFFE
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -669,7 +643,6 @@ layer {
     axis: 1
     num_output: 512
     kernel_size: 1
-    engine: CAFFE
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -721,9 +694,6 @@ layer {
   type: "ReLU"
   bottom: "conv4b_sum"
   top: "conv4b_sum"
-  relu_param {
-    engine: CAFFE
-  }
 }
 
 #### upsampling path ############
@@ -746,7 +716,6 @@ layer {
       type: "constant"
       std: 0
     }
-    engine: CAFFE
   }
 }
 layer {
@@ -788,9 +757,6 @@ layer {
   type: "ReLU"
   bottom: "Fusion_deconv1a"
   top: "Fusion_deconv1a"
-  relu_param {
-    engine: CAFFE
-  }
 }
 
 layer {
@@ -812,7 +778,6 @@ layer {
     kernel_size: 1
     kernel_size: 1
     kernel_size: 1
-    engine: CAFFE
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -854,9 +819,6 @@ layer {
   type: "ReLU"
   bottom: "Deconv1b"
   top: "Deconv1b"
-  relu_param {
-    engine: CAFFE
-  }
 }
 
 layer {
@@ -879,7 +841,6 @@ layer {
     kernel_size: 3
     kernel_size: 3
     kernel_size: 3
-    engine: CAFFE
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -930,9 +891,6 @@ layer {
   type: "ReLU"
   bottom: "Deconv1c_sum"
   top: "Deconv1c_sum"
-  relu_param {
-    engine: CAFFE
-  }
 }
 ##Deconv2
 layer {
@@ -953,7 +911,6 @@ layer {
       type: "constant"
       std: 0
     }
-    engine: CAFFE
   }
 }
 layer {
@@ -995,9 +952,6 @@ layer {
   type: "ReLU"
   bottom: "Fusion_deconv2a"
   top: "Fusion_deconv2a"
-  relu_param {
-    engine: CAFFE
-  }
 }
 
 layer {
@@ -1019,7 +973,6 @@ layer {
     kernel_size: 1
     kernel_size: 1
     kernel_size: 1
-    engine: CAFFE
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -1061,9 +1014,6 @@ layer {
   type: "ReLU"
   bottom: "Deconv2b"
   top: "Deconv2b"
-  relu_param {
-    engine: CAFFE
-  }
 }
 layer {
   name: "Deconv2c"
@@ -1085,7 +1035,6 @@ layer {
     kernel_size: 3
     kernel_size: 3
     kernel_size: 3
-    engine: CAFFE
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -1136,9 +1085,6 @@ layer {
   type: "ReLU"
   bottom: "Deconv2c_sum"
   top: "Deconv2c_sum"
-  relu_param {
-    engine: CAFFE
-  }
 }
 ##Deconv3
 layer {
@@ -1159,7 +1105,6 @@ layer {
       type: "constant"
       std: 0
     }
-    engine: CAFFE
   }
 }
 layer {
@@ -1201,9 +1146,6 @@ layer {
   type: "ReLU"
   bottom: "Fusion_deconv3a"
   top: "Fusion_deconv3a"
-  relu_param {
-    engine: CAFFE
-  }
 }
 
 layer {
@@ -1225,7 +1167,6 @@ layer {
     kernel_size: 1
     kernel_size: 1
     kernel_size: 1
-    engine: CAFFE
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -1267,9 +1208,6 @@ layer {
   type: "ReLU"
   bottom: "Deconv3b"
   top: "Deconv3b"
-  relu_param {
-    engine: CAFFE
-  }
 }
 layer {
   name: "Deconv3c"
@@ -1291,7 +1229,6 @@ layer {
     kernel_size: 3
     kernel_size: 3
     kernel_size: 3
-    engine: CAFFE
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -1341,9 +1278,6 @@ layer {
   type: "ReLU"
   bottom: "Deconv3c_sum"
   top: "Deconv3c_sum"
-  relu_param {
-    engine: CAFFE
-  }
 }
 
 ########################################
@@ -1364,7 +1298,6 @@ layer {
   convolution_param {
     num_output: 2
     kernel_size: 1
-    engine: CAFFE
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -1404,7 +1337,6 @@ layer {
   convolution_param {
     num_output: 2
     kernel_size: 1
-    engine: CAFFE
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -1430,7 +1362,6 @@ layer {
     type: "bilinear_3D"
     }
     bias_term: false
-    engine: CAFFE
   }
   param { 
     lr_mult: 0.1 
@@ -1465,7 +1396,6 @@ layer {
   convolution_param {
     num_output: 2
     kernel_size: 1
-    engine: CAFFE
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -1491,7 +1421,6 @@ layer {
     type: "bilinear_3D"
     }
     bias_term: false
-    engine: CAFFE
   }
   param { 
     lr_mult: 0.1 

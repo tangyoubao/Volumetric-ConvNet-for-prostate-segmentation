@@ -9,8 +9,8 @@ We slightly modify the original Caffe library to supporting the 3D operations. Y
 The main modification includes:
 * ND support for CuDNN engine in "Convolution" layer 
 * CuDNN engine for layer "Deconvolution"
-* support for ND pooling in 'Pooling' layer
-* Add randomly crop operation in "HDF5DataLayer"
+* Support for ND pooling in 'Pooling' layer
+* Add randomly cropping operation in "HDF5DataLayer"
 
 For installation, please follow the offical instructions of [Caffe](http://caffe.berkeleyvision.org/installation.html).
 
